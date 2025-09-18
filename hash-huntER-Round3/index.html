@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureVault Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-form">
+            <div class="logo">
+                <h1>🔐 SecureVault</h1>
+                <p>Enterprise Security Portal</p>
+            </div>
+            
+            <form id="loginForm" onsubmit="return validateLogin(event)">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" value="admin" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="login-btn">Login</button>
+                
+                <div id="error-message" class="error-message"></div>
+            </form>
+            
+            <div class="footer">
+                <p>© 2024 SecureVault Inc. All rights reserved.</p>
+                <p><small>Protected by advanced encryption technology</small></p>
+                <p><small style="color: #888; margin-top: 10px;">💡 Hint: Sometimes the most secure systems leave traces in unexpected places...</small></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

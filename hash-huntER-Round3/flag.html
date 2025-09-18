@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureVault - Access Granted</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .success-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .success-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            margin: 2rem;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            color: #28a745;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+        
+        .flag-container {
+            background: #1a1a1a;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border: 2px solid #00ff00;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .flag-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
+            animation: scan 3s infinite;
+        }
+        
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .flag-text {
+            position: relative;
+            z-index: 1;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .congratulations {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .details {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+        
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .logout-btn:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-content">
+            <div class="success-icon">🎉</div>
+            
+            <h1 class="congratulations">Congratulations!</h1>
+            <h2>Access Granted to SecureVault</h2>
+            
+            <p>You have successfully cracked the hash and gained access to the secure system!</p>
+            
+            <div class="flag-container">
+                <div class="flag-text">cbc{you_cracked_the_hash}</div>
+            </div>
+            
+            <div class="details">
+                <h3>🔍 Challenge Solution Summary:</h3>
+                <ul>
+                    <li><strong>Hash Found:</strong> Split into two parts in JavaScript</li>
+                    <li><strong>Full Hash:</strong> 5f4dcc3b5aa765d61d8327deb882cf99</li>
+                    <li><strong>Hash Type:</strong> MD5</li>
+                    <li><strong>Original Password:</strong> "password"</li>
+                    <li><strong>Method:</strong> JavaScript source code inspection</li>
+                </ul>
+            </div>
+            
+            <div class="details">
+                <h3>🛡️ Security Lesson:</h3>
+                <p>This challenge demonstrates why sensitive information should never be stored in client-side code. Even when split or obfuscated, client-side data is always accessible to determined attackers.</p>
+            </div>
+            
+            <button onclick="logout()" class="logout-btn">Logout & Try Again</button>
+            
+            <div class="footer" style="margin-top: 2rem; color: #666;">
+                <p><small>Challenge completed successfully!</small></p>
+                <p><small>Time: <span id="completion-time"></span></small></p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Check authentication
+        function checkAuth() {
+            const authenticated = sessionStorage.getItem('authenticated');
+            if (!authenticated || authenticated !== 'true') {
+                window.location.href = 'index.html';
+                return;
+            }
+        }
+        
+        // Logout function
+        function logout() {
+            sessionStorage.clear();
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+        
+        // Display completion time
+        function displayCompletionTime() {
+            const loginTime = sessionStorage.getItem('loginTime');
+            if (loginTime) {
+                const completionTime = new Date();
+                document.getElementById('completion-time').textContent = completionTime.toLocaleString();
+            }
+        }
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            displayCompletionTime();
+            
+            // Add some celebratory effects
+            setTimeout(() => {
+                const flag = document.querySelector('.flag-text');
+                flag.style.animation = 'pulse 1s ease-in-out';
+            }, 1000);
+        });
+        
+        // Prevent going back without proper logout
+        window.addEventListener('beforeunload', function(e) {
+            // Don't clear session on page refresh, only on navigation away
+        });
+        
+        // Add pulse animation for flag
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        console.log('%c🎉 Congratulations!', 'color: #28a745; font-size: 20px; font-weight: bold;');
+        console.log('%cYou successfully completed the Hash Hunt challenge!', 'color: #666; font-size: 14px;');
+        console.log('%cFlag: cbc{you_cracked_the_hash}', 'color: #007bff; font-size: 16px; font-weight: bold;');
+    </script>
+</body>
+</html>

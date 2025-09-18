@@ -1,0 +1,313 @@
+/* SecureVault Login Portal Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-form {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo h1 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.logo p {
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fff;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
+}
+
+.form-group input[readonly] {
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+    border-color: #dee2e6;
+}
+
+.form-group input[readonly]:focus {
+    border-color: #dee2e6;
+    box-shadow: none;
+    transform: none;
+}
+
+.form-group.focused input {
+    border-color: #667eea;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #f5c6cb;
+    font-size: 0.9rem;
+    display: none;
+    margin-top: 1rem;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e1e5e9;
+}
+
+.footer p {
+    color: #666;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer small {
+    color: #999;
+    font-size: 0.7rem;
+}
+
+/* Loading animation for form submission */
+.login-btn.loading {
+    position: relative;
+    color: transparent;
+}
+
+.login-btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #ffffff;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .login-form {
+        padding: 2rem 1.5rem;
+    }
+    
+    .logo h1 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Security indicator */
+.security-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    color: #28a745;
+    font-size: 0.8rem;
+}
+
+.security-indicator::before {
+    content: '🔒';
+    margin-right: 0.5rem;
+}
+
+/* Hover effects for inputs */
+.form-group input:hover {
+    border-color: #c3c8d4;
+}
+
+/* Focus ring for accessibility */
+.form-group input:focus-visible {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Disabled state */
+.login-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.login-btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Success message styling */
+.success-message {
+    background: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #c3e6cb;
+    font-size: 0.9rem;
+    display: none;
+    margin-top: 1rem;
+    animation: slideIn 0.3s ease;
+}
+
+/* Form validation styling */
+.form-group input.invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.form-group input.valid {
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+/* Subtle animations */
+.login-form {
+    animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+    .login-form {
+        background: rgba(30, 30, 30, 0.95);
+        color: #fff;
+    }
+    
+    .logo h1,
+    .form-group label {
+        color: #fff;
+    }
+    
+    .logo p {
+        color: #ccc;
+    }
+    
+    .form-group input {
+        background: #444;
+        border-color: #555;
+        color: #fff;
+    }
+    
+    .form-group input:focus {
+        border-color: #667eea;
+        background: #555;
+    }
+    
+    .footer p {
+        color: #ccc;
+    }
+    
+    .footer small {
+        color: #999;
+    }
+}
